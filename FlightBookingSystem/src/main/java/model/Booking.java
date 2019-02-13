@@ -9,10 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
-
 @Entity
+@NamedQueries({ @NamedQuery(name = "Booking.All", query = "SELECT b FROM Booking b"),
+				@NamedQuery(name = "Booking.readByPassenger", query = "SELECT b FROM Booking b WHERE b.passenger = :passengerName")
+			 })
 public class Booking implements IStorable {
 
 	@Id
@@ -29,6 +33,7 @@ public class Booking implements IStorable {
 	private Trip trip;
 
 	@ManyToOne
+	@JoinColumn(name = "passengerId",referencedColumnName="userId")
 	private Passenger passenger;
 
 	@Column(name = "booking_price")

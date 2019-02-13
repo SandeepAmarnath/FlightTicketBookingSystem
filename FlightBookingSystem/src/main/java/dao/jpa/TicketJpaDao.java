@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import dao.interfaces.ITicketDao;
+import model.Booking;
 import model.Ticket;
 
 public class TicketJpaDao implements ITicketDao {
@@ -21,27 +22,31 @@ public class TicketJpaDao implements ITicketDao {
 	}
 
 	@Override
-	public List<Ticket> readByPassport(String passport) {
+	public List<Ticket> readByBooking(Booking booking) {
 		
-		return null;
+		EntityManager em = EMFactory.getEntityManager();
+		List<Ticket> tickets = em.createNamedQuery("Ticket.readByBooking",Ticket.class).setParameter("booking", booking).getResultList();
+		return tickets;
 	}
 
 	@Override
 	public List<Ticket> readByPassenger(String passenger) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = EMFactory.getEntityManager();
+		List<Ticket> tickets = em.createNamedQuery("Ticket.readByPassenger",Ticket.class).setParameter("passengerName", passenger).getResultList();
+		return tickets;
 	}
 
 	@Override
 	public List<Ticket> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = EMFactory.getEntityManager();
+		List<Ticket> tickets = em.createNamedQuery("Ticket.All",Ticket.class).getResultList();
+		return tickets;
 	}
 
 	@Override
 	public Ticket readById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = EMFactory.getEntityManager();
+		return em.find(Ticket.class, id);
 	}
 
 }

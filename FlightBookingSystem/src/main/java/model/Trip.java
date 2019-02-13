@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -19,6 +21,11 @@ import javax.persistence.SequenceGenerator;
 import model.City;
 
 @Entity
+@NamedQueries({ @NamedQuery(name = "Trip.All", query = "SELECT t FROM Trip t"), 
+				@NamedQuery(name = "Trip.readByPlaneName" , query = "SELECT t FROM Trip t WHERE t.plane = :plane"),
+				@NamedQuery(name = "Trip.readBySource" , query = "SELECT t FROM Trip t WHERE t.arrivalCity = :cityName"),
+				@NamedQuery(name = "Trip.readByStartDate" , query = "SELECT t FROM Trip t WHERE t.departDateTime Like :startDate")
+		     })
 public class Trip implements IStorable {
 
 	@Id

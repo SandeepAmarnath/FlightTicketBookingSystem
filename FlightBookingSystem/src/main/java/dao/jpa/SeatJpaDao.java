@@ -17,7 +17,8 @@ public class SeatJpaDao implements ISeatDao{
 		em.persist(seat);
 		em.getTransaction().commit();
 		em.close();
-		return true;}
+		return true;
+	}
 
 	@Override
 	public List<Seat> readAll() {
@@ -29,8 +30,8 @@ public class SeatJpaDao implements ISeatDao{
 
 	@Override
 	public Seat readById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = EMFactory.getEntityManager();
+		return em.find(Seat.class, id);
 	}
 
 }

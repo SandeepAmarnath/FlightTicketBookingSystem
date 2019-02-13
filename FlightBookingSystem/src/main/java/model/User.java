@@ -6,10 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
+@NamedQueries({ @NamedQuery(name = "User.readByName", query = "SELECT u FROM User u WHERE u.username = :username")})
 @Table(name = "All_Users")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User implements IStorable{
@@ -19,7 +22,7 @@ public abstract class User implements IStorable{
 	@SequenceGenerator(name = "userId", sequenceName = "userId", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(generator = "userId")
 	private int userId;
-
+	
 	@Column(name = "username")
 	private String username;
 
@@ -72,16 +75,18 @@ public abstract class User implements IStorable{
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public User setEmail(String email) {
 		this.email = email;
+		return this;
 	}
 
 	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public User setPassword(String password) {
 		this.password = password;
+		return this;
 	}
 
 	@Override

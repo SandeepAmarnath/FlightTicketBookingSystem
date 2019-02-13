@@ -1,7 +1,6 @@
 package dao.jpa;
 
 import java.util.List;
-
 import dao.interfaces.IAdminDao;
 import model.Admin;
 import model.User;
@@ -10,12 +9,6 @@ public class AdminJpaDao implements IAdminDao {
 
 	@Override
 	public User login(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public User register(String username, String password, String phone, String address, String passport) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -48,6 +41,18 @@ public class AdminJpaDao implements IAdminDao {
 	public Admin readByName(String adminName) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean register(User t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean changePassword(String username, String oldPassword, String newPassword) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

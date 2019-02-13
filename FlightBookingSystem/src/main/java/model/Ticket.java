@@ -7,10 +7,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
+@NamedQueries({ @NamedQuery(name = "Ticket.All", query = "SELECT t FROM Ticket t"), 
+	@NamedQuery(name = "Ticket.readByBooking", query = "SELECT t FROM Ticket t WHERE t.booking = :booking"),
+	@NamedQuery(name = "Ticket.readByPassenger", query = "SELECT t FROM Ticket t WHERE t.passenger = :passenger")
+ 			 })
 public class Ticket implements IStorable {
 
 	@Id
@@ -22,7 +28,11 @@ public class Ticket implements IStorable {
 	@ManyToOne
 	@JoinColumn(name = "bookingId", referencedColumnName = "bookingId")
 	private Booking booking;
-
+	
+	@ManyToOne
+	@JoinColumn(name="passengerId",referencedColumnName = "userId")
+	private Passenger passenger;
+	
 	@OneToOne
 	private Seat seat;
 
@@ -57,6 +67,15 @@ public class Ticket implements IStorable {
 
 	public double getPrice() {
 		return price;
+	}
+	
+	public Passenger getPassenger() {
+		return passenger;
+	}
+
+	public Ticket setPassenger(Passenger passenger) {
+		this.passenger = passenger;
+		return this;
 	}
 
 	public Ticket setPrice(double price) {
