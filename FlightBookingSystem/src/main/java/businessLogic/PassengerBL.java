@@ -18,6 +18,12 @@ public class PassengerBL {
 		this.passengerDao = JpaDaoFactory.getPassengerDao();
 	}
 
+	//TODO: Basic registration
+	public boolean register() {
+		// TODO: Write here
+		return false;
+	}
+	
 	public String register(String firstName, String lastName, String username, String email, String password,
 			String phone, String passport) {
 

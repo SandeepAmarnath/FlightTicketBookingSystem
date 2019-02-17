@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 
 import dao.interfaces.ISeatDao;
 import model.Seat;
+import model.SeatNumber;
 
 public class SeatJpaDao implements ISeatDao{
 
@@ -32,6 +33,14 @@ public class SeatJpaDao implements ISeatDao{
 	public Seat readById(int id) {
 		EntityManager em = EMFactory.getEntityManager();
 		return em.find(Seat.class, id);
+	}
+
+	@Override
+	public Seat readBySeatNumber(SeatNumber seatNumber) {
+		
+		EntityManager em = EMFactory.getEntityManager();
+		Seat seat = em.createNamedQuery("Seat.readByNumber", Seat.class).setParameter("seatNumber", seatNumber).getSingleResult();
+		return seat;
 	}
 
 }

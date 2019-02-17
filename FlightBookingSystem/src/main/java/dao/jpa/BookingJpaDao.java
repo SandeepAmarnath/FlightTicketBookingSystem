@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 
 import dao.interfaces.IBookingDao;
 import model.Booking;
+import model.Passenger;
+import model.Trip;
 
 public class BookingJpaDao implements IBookingDao{
 
@@ -51,6 +53,12 @@ public class BookingJpaDao implements IBookingDao{
 	public Booking readById(int id) {
 		EntityManager em = EMFactory.getEntityManager();
 		return em.find(Booking.class, id);
+	}
+
+	@Override
+	public Booking readByTripAndPassenger(Trip trip, Passenger passenger) {
+		EntityManager em = EMFactory.getEntityManager();
+		return em.createNamedQuery("Booking.readByTripAndPassenger",Booking.class).setParameter("trip", trip).setParameter("passenger", passenger).getSingleResult();
 	}
 
 }

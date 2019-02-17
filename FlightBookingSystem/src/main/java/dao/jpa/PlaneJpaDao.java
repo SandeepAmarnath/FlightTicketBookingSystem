@@ -45,10 +45,9 @@ public class PlaneJpaDao implements IPlaneDao {
 	}
 
 	@Override
-	public Plane readByName(String planeName) {
+	public List<Plane> readByNameLike(String planeNameLike) {
 		EntityManager em = EMFactory.getEntityManager();
-		return em.createNamedQuery("Plane.readByName", Plane.class).setParameter("planeName", planeName)
-				.getSingleResult();
+		return em.createNamedQuery("Plane.readByNameLike", Plane.class).setParameter("planeNameLike", "%"+planeNameLike+"%").getResultList();
 	}
 
 }

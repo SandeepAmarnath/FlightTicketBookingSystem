@@ -6,7 +6,7 @@ import dao.interfaces.ICityDao;
 import dao.interfaces.IPassengerDao;
 import dao.interfaces.IPlaneDao;
 import dao.interfaces.ISeatDao;
-import dao.interfaces.ITicketDao;
+import dao.interfaces.IPassengerBookingDao;
 import dao.interfaces.ITripDao;
 
 public class JpaDaoFactory {
@@ -35,8 +35,8 @@ public class JpaDaoFactory {
 		return new SeatJpaDao();
 	}
 
-	public static final ITicketDao getTicketDao() {
-		return new TicketJpaDao();
+	public static final IPassengerBookingDao getTicketDao() {
+		return new PassengerBookingJpaDao();
 	}
 
 	public static final ITripDao getTripDao() {
